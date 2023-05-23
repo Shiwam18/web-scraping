@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter Scraper</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Function to handle the form submission
+    function submitForm() {
+      var username = document.getElementById('username').value;
+      
+      // Send an AJAX request to the backend script
+      $.ajax({
+        type: 'POST',
+        url: '/scrape',
+        data: { username: username },
+        success: function(response) {
+          // Display the scraped data on the web page
+          document.getElementById('result').innerHTML = response;
+        },
+        error: function() {
+          alert('An error occurred during scraping.');
+        }
+      });
+      
+      return false;
+    }
+  </script>
+</head>
+<body>
+  <h1>Twitter Scraper</h1>
+  <form onsubmit="return submitForm()">
+    <label for="username">Enter Twitter Username:</label>
+    <input type="text" id="username" required>
+    <button type="submit">Scrape</button>
+  </form>
+  <div id="result"></div>
+</body>
+</html>
